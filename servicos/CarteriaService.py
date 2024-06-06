@@ -1,8 +1,8 @@
 import time
 
-from Scripts.Class.Usuario import Usuario
-from Scripts.Class.Carteira import Carteira
-from test import limpa
+from Class.Usuario import Usuario
+from Class.Carteira import Carteira
+from funcoes.limpa import limpa
 
 
 class CarteiraService:

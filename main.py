@@ -1,4 +1,4 @@
-from Scripts.Class.Usuario import Usuario
+from Class.Usuario import Usuario
 from servicos.CarteriaService import CarteiraService
 
 

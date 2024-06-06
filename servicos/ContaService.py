@@ -1,7 +1,5 @@
 import time
-
-from test import limpa
-
+from funcoes.limpa import limpa
 
 class ContaService:
 

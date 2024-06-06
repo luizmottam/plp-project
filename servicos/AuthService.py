@@ -2,7 +2,7 @@
 class AuthService:
 
     @staticmethod
-    def passwd_authentication(user):
+    def autentificacao_de_senha(user):
         user_id = None
         # Find the user ID
         with open(f"Usuarios/user_info.txt", "r") as file:

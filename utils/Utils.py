@@ -1,7 +1,7 @@
 import getpass
 import os
 
-from Scripts.Class.Usuario import Usuario
+from Class.Usuario import Usuario
 
 
 class Utils:

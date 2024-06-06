@@ -3,7 +3,6 @@ import uuid
 import time
 import os
 
-
 # CLASSES PRINCIPAIS
 class Wallet:
 
