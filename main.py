@@ -1,21 +1,11 @@
-from Class.Usuario import Usuario
-from servicos.CarteriaService import CarteiraService
-
+from utils.Utils import Utils
+from servicos.AuthService import AuthService
 
 def main():
-    # Criando um usuário
-    usuario = Usuario(nome="João Silva", email="joao@example.com")
-
-    # Criando uma carteira para o usuário
-    carteira = CarteiraService.criar_carteira_para_usuario(usuario, "Carteira de Investimentos")
-
-    # Adicionando tickets à carteira
-    CarteiraService.adicionar_ticket_na_carteira(carteira, "AAPL")
-    CarteiraService.adicionar_ticket_na_carteira(carteira, "GOOGL")
-
-    # Exibindo o usuário e suas carteiras
-    print(usuario)
-
+    while True:
+        esc = int(input("1. Sign Up\n2. Login\nChoose an option: "))
+        usuario = Utils.conta_usuario()
+        AuthService.authenticator(esc, usuario)
 
 if __name__ == "__main__":
     main()

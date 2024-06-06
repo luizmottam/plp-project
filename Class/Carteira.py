@@ -1,10 +1,9 @@
-from typing import List
-
-
 class Carteira:
-    def __init__(self, nome: str, tickets: List):
+    def __init__(self, nome: str, tickets=None):
+        if tickets is None:
+            tickets = []
         self.nome = nome
-        self.tickets: List[str] = []
+        self.tickets = tickets
 
     def adicionarticket(self, ticket: str):
         self.tickets.append(ticket)

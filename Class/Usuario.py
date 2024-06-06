@@ -1,10 +1,9 @@
 import uuid
 from typing import List
-from Scripts.Class.Carteira import Carteira
-
+from Class.Carteira import Carteira
 
 class Usuario:
-    def __init__(self, nome: str, email: str, senha: str):
+    def __init__(self, nome: str, senha: str, email: str):
         self.user_id = str(uuid.uuid4())
         self.nome = nome
         self.senha = senha
@@ -15,4 +14,4 @@ class Usuario:
         self.carteiras.append(carteira)
 
     def __repr__(self):
-        return f"Usuario(nome={self.nome}, (id={self.user_id} email={self.email}, senha={self.senha}, carteiras={self.carteiras})"
+        return f"Usuario(nome={self.nome}, id={self.user_id}, email={self.email}, senha={self.senha}, carteiras={self.carteiras})"
