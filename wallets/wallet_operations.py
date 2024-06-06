@@ -1,5 +1,6 @@
 from wallets.wallet import Wallet
 from utils.console_operations import limpa
+from utils.file_operations import save_user_wallets
 import time
 
 def print_wallets(user):

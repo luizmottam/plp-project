@@ -1,6 +1,6 @@
 import getpass
 from users.user import User
-from utils.file_operations import save_user_info, load_user_info, save_user_wallets
+from utils.file_operations import save_user_info, load_user_info, load_user_passwd
 from utils.console_operations import limpa
 import time
 
