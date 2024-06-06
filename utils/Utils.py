@@ -4,11 +4,11 @@ import os
 from Scripts.Class.Usuario import Usuario
 
 
-class Utils:
+def limpa():
+    os.system("cls")
 
-    @staticmethod
-    def limpa():
-        os.system("cls")
+
+class Utils:
 
     @staticmethod
     def conta_usuario():

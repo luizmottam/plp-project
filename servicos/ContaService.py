@@ -1,11 +1,10 @@
 import time
 
-from test import limpa
+from utils.Utils import limpa
 
 
 class ContaService:
 
-    @staticmethod
     def criar_usuario(usuario):
         # Add info public
         with open("Users/user_info.txt", "a") as file:
@@ -20,5 +19,3 @@ class ContaService:
         print("Usuário criado\n")
         time.sleep(5)
         limpa()
-
-
