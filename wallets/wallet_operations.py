@@ -4,7 +4,7 @@ from utils.file_operations import save_user_wallets
 import time
 
 def print_wallets(user):
-    with open(f"Users/{user.user_id}.txt", 'r') as file:
+    with open(f"db/{user.user_id}.txt", 'r') as file:
         lines = file.readlines()
         if len(lines) < 4:
             print("Você ainda não tem nenhuma carteira")
