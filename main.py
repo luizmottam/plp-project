@@ -7,6 +7,7 @@ from wallets.wallet_operations import imprimir_carteira, criar_carteira
 def menu_login():
     while True:
         try:
+            limpa()
             print("1. Cadastrar-se\n2. Entrar com usuário")
             esc = int(input("Escolha: "))
             if esc in [1, 2]:
@@ -62,7 +63,7 @@ def main():
                     elif escolha_carteira == 3:
                         print("Editar carteira(s) selecionado.")
                         # Adicione o código para editar carteiras aqui
-                    elif escolha_carteira == 4:2
+                    elif escolha_carteira == 4:
                         print("Deletar carteira(s) selecionado.")
                         # Adicione o código para deletar carteiras aqui
                     elif escolha_carteira == 5:
