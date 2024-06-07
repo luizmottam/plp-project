@@ -1,4 +1,4 @@
 class Wallet:
-    def __init__(self, name, tickets) -> None:
+    def __init__(self, name, indices) -> None:
         self.nome = name
-        self.indices = tickets
+        self.indices = indices
