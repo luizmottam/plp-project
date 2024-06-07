@@ -1,19 +1,12 @@
-from users.user_operations import user_account, authenticator
-from utils.console_operations import limpa
-from users.user_operations import criacao_do_usuario
-
-'''def main():
-    esc = int(input("1. Sign Up\n2. Log in\nEnter: "))
-    limpa()
-    user = user_account()
-    authenticator(esc, user)
-    print(user.wallets)
-'''
+import getpass
+import time
+from utils.console_operations import limpa, titulo
+from users.user_operations import criacao_do_usuario, conta_do_usuario, autentifica_senha
+from wallets.wallet_operations import imprimir_carteira, criar_carteira
 
 def menu_login():
     while True:
         try:
-            limpa()
             print("1. Cadastrar-se\n2. Entrar com usuário")
             esc = int(input("Escolha: "))
             if esc in [1, 2]:
@@ -47,52 +40,52 @@ def menu_de_operacoes_ticket():
         except ValueError:
             print("Entrada inválida. Por favor, insira um número.")
 
-# Exemplo de utilização
 def main():
     while True:
         escolha_login = menu_login()
         if escolha_login == 1:
+            print("Cadastrar-se selecionado.")
             criacao_do_usuario()
-            # Adicione o código de cadastro aqui
         elif escolha_login == 2:
             print("Entrar com usuário selecionado.")
-            # Adicione o código de login aqui
+            user = conta_do_usuario()
+            print(user)
+            if user and autentifica_senha(user):
+                while True:
+                    escolha_carteira = menu_de_operacoes_carteira()
+                    if escolha_carteira == 1:
+                        print("Ver carteira(s) selecionado.")
+                        imprimir_carteira(user)
+                    elif escolha_carteira == 2:
+                        print("Adicionar carteira selecionado.")
+                        criar_carteira(user)
+                    elif escolha_carteira == 3:
+                        print("Editar carteira(s) selecionado.")
+                        # Adicione o código para editar carteiras aqui
+                    elif escolha_carteira == 4:2
+                        print("Deletar carteira(s) selecionado.")
+                        # Adicione o código para deletar carteiras aqui
+                    elif escolha_carteira == 5:
+                        print("Saindo do menu de carteiras.")
+                        break
 
-        while True:
-            escolha_carteira = menu_de_operacoes_carteira()
-            if escolha_carteira == 1:
-                print("Ver carteira(s) selecionado.")
-                # Adicione o código para ver carteiras aqui
-            elif escolha_carteira == 2:
-                print("Adicionar carteira selecionado.")
-                # Adicione o código para adicionar carteira aqui
-            elif escolha_carteira == 3:
-                print("Editar carteira(s) selecionado.")
-                # Adicione o código para editar carteiras aqui
-            elif escolha_carteira == 4:
-                print("Deletar carteira(s) selecionado.")
-                # Adicione o código para deletar carteiras aqui
-            elif escolha_carteira == 5:
-                print("Saindo do menu de carteiras.")
-                break
-
-        while True:
-            escolha_ticket = menu_de_operacoes_ticket()
-            if escolha_ticket == 1:
-                print("Ver ticket(s) selecionado.")
-                # Adicione o código para ver tickets aqui
-            elif escolha_ticket == 2:
-                print("Adicionar ticket selecionado.")
-                # Adicione o código para adicionar ticket aqui
-            elif escolha_ticket == 3:
-                print("Editar ticket(s) selecionado.")
-                # Adicione o código para editar tickets aqui
-            elif escolha_ticket == 4:
-                print("Deletar ticket(s) selecionado.")
-                # Adicione o código para deletar tickets aqui
-            elif escolha_ticket == 5:
-                print("Saindo do menu de tickets.")
-                break
+                while True:
+                    escolha_ticket = menu_de_operacoes_ticket()
+                    if escolha_ticket == 1:
+                        print("Ver ticket(s) selecionado.")
+                        # Adicione o código para ver tickets aqui
+                    elif escolha_ticket == 2:
+                        print("Adicionar ticket selecionado.")
+                        # Adicione o código para adicionar ticket aqui
+                    elif escolha_ticket == 3:
+                        print("Editar ticket(s) selecionado.")
+                        # Adicione o código para editar tickets aqui
+                    elif escolha_ticket == 4:
+                        print("Deletar ticket(s) selecionado.")
+                        # Adicione o código para deletar tickets aqui
+                    elif escolha_ticket == 5:
+                        print("Saindo do menu de tickets.")
+                        break
 
 if __name__ == "__main__":
     main()

@@ -8,5 +8,5 @@ class User:
         self.senha = senha
         self.carteiras = []
 
-    def adiconar_carteira(self, carteira):
+    def adicionar_carteira(self, carteira):
         self.carteiras.append(carteira)

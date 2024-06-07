@@ -1,59 +1,61 @@
 from wallets.wallet import Wallet
 from utils.console_operations import limpa, titulo
-from utils.file_operations import save_user_wallets
+from utils.file_operations import salva_carteira_do_usuario
 import time
 
-def print_wallets(user):
-    with open(f"db/{user.user_id}.txt", 'r') as file:
-        lines = file.readlines()
-        if len(lines) < 4:
-            print("Você ainda não tem nenhuma carteira")
-        else:
-            for linha in lines[4:]:
-                print(linha.strip())
-
-def create_wallet(user):
-    wallet_name = input("Enter the name of the new wallet: ")
-    indices = input("Enter comma-separated indices: ").split(', ')
-    wallet = Wallet(wallet_name, indices)
-    user.adicionar_carteira(wallet)
-    print("Wallet created successfully.")
-    limpa()
-    print("- Wallet : ", wallet.nome)
-    print("  Tickets: ", wallet.indices)
-    time.sleep(2)
-    limpa()
-    print_wallets(user)
-    save_user_wallets(user)
-
-# NOVAS FUNÇÔES
+# NOVAS FUNÇÕES - Com Exceções
 def imprimir_carteira(user):
-    with open(f"db/{user.user_id}.txt", 'r') as file:
-        lines = file.readlines()
-        if len(lines) < 4:
-            print("Você ainda não tem nenhuma carteira")
-        else:
-            for linha in lines[4:]:
-                print(linha.strip())
-                
+    try:
+        with open(f"db/{user.id_usuario}.txt", 'r') as file:
+            lines = file.readlines()
+            if len(lines) < 4:
+                print("Você ainda não tem nenhuma carteira")
+            else:
+                for linha in lines[4:]:
+                    print(linha.strip())
+    except FileNotFoundError:
+        print("Arquivo de carteira não encontrado.")
+    except Exception as e:
+        print(f"Ocorreu um erro ao ler a carteira: {e}")
     return 0
 
+def imprime_nova_carteira(carteira):
+    try:
+        titulo("CARTEIRA ADICIONADA")
+        print("- Carteira : ", carteira.nome)
+        print("  Indices: ", carteira.indices)
+        time.sleep(2)
+        limpa()
+    except Exception as e:
+        print(f"Ocorreu um erro ao imprimir a carteira: {e}")
 
-def imprime_carteira(carteira):
-    titulo("CARTEIRA ADICIONADA")
-    print("- Carteira : ", carteira.nome)
-    print("  Indices: ", carteira.indices)
-    time.sleep(2)
-    limpa()
-     
 def criar_carteira(user):
-    titulo("Nova Carteira")
-    nome_da_carteira = input("Nome da Cartiera: ")
-    indices = input("Indices (digite separado por ,): ")
-    carteira = Wallet(nome_da_carteira, indices)
-    
-    esc = input("Deseja adicionar carteira a suas carteiras (s/n)? ").upper()
-    if esc == 'S':
-        user.adicionar_carteira(carteira)
-        imprime_carteira(carteira)
-    print(f"A carteira {nome_da_carteira} foi descartada")
+    try:
+        titulo("Nova Carteira")
+        nome_da_carteira = input("Nome da Carteira: ").strip()
+        indices = input("Indices (digite separado por ,): ").strip()
+
+        if not nome_da_carteira:
+            raise ValueError("O nome da carteira não pode ser vazio.")
+        if not indices:
+            raise ValueError("Os índices não podem ser vazios.")
+
+        carteira = Wallet(nome_da_carteira, indices)
+        
+        while True:
+            esc = input("Deseja adicionar carteira a suas carteiras (s/n)? ").strip().upper()
+            if esc in ['S', 'N']:
+                break
+            else:
+                print("Opção inválida. Digite 's' para sim ou 'n' para não.")
+        
+        if esc == 'S':
+            user.adicionar_carteira(carteira)
+            imprime_nova_carteira(carteira)
+            salva_carteira_do_usuario(user)
+        else:
+            print(f"A carteira {nome_da_carteira} foi descartada")
+    except ValueError as ve:
+        print(f"Erro: {ve}")
+    except Exception as e:
+        print(f"Ocorreu um erro ao criar a carteira: {e}")
