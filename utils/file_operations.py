@@ -44,11 +44,13 @@ def carrega_informacoes_usuario():
     
 def salva_carteira_do_usuario(user):
     with open(f"db/{user.id_usuario}.txt", "a") as file:
-        for carteira in user.carteiras:
-            file.write(f"- Carteira: {carteira.nome}\n")
-            # Formata os tickets removendo espaços extras e caracteres não desejados
-            tickets_formatados = [ticket.strip() for ticket in carteira.indices.split(',')]
-            # Remove itens vazios da lista
-            tickets_formatados = [ticket for ticket in tickets_formatados if ticket]
-            file.write(f"  Tickets: {', '.join(tickets_formatados)}\n")
+        carteira = user.carteiras[len(user.carteiras) - 1]
+        file.write(f"- Carteira: {carteira.nome}\n")
+        # Formata os tickets removendo espaços extras e caracteres não desejados
+        tickets_formatados = [ticket.strip() for ticket in carteira.indices.split(',')]
+        # Remove itens vazios da lista
+        tickets_formatados = [ticket for ticket in tickets_formatados if ticket]
+        file.write(f"  Tickets: {', '.join(tickets_formatados)}\n")
+        carteira = None
         file.write("\n")
+        

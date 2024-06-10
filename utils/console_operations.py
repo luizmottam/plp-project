@@ -5,4 +5,3 @@ def limpa():
 
 def titulo(texto):
     print("{:=^30}".format(texto))
-
