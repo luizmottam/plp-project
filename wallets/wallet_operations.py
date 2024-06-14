@@ -3,27 +3,26 @@ from utils.console_operations import limpa, titulo
 from utils.file_operations import salva_carteira_do_usuario
 import time
 
-# NOVAS FUNÇÕES - Com Exceções
 def imprimir_carteira(user):
     try:
         with open(f"db/{user.id_usuario}.txt", 'r') as file:
             lines = file.readlines()
-            if len(lines) < 4:
+            if len(lines) < 3:
                 print("Você ainda não tem nenhuma carteira")
             else:
-                for linha in lines[4:]:
+                titulo("SUAS CARTEIRAS")
+                for linha in lines[3:]:
                     print(linha.strip())
     except FileNotFoundError:
         print("Arquivo de carteira não encontrado.")
     except Exception as e:
         print(f"Ocorreu um erro ao ler a carteira: {e}")
-    return 0
 
 def imprime_nova_carteira(carteira):
     try:
         titulo("CARTEIRA ADICIONADA")
-        print("- Carteira : ", carteira.nome)
-        print("  Indices: ", carteira.indices)
+        print(f"- Carteira : {carteira.nome}")
+        print(f"  Indices: {carteira.indices}")
         time.sleep(2)
         limpa()
     except Exception as e:
@@ -46,8 +45,7 @@ def criar_carteira(user):
             esc = input("Deseja adicionar carteira a suas carteiras (s/n)? ").strip().upper()
             if esc in ['S', 'N']:
                 break
-            else:
-                print("Opção inválida. Digite 's' para sim ou 'n' para não.")
+            print("Opção inválida. Digite 's' para sim ou 'n' para não.")
         
         if esc == 'S':
             user.adicionar_carteira(carteira)
@@ -59,3 +57,35 @@ def criar_carteira(user):
         print(f"Erro: {ve}")
     except Exception as e:
         print(f"Ocorreu um erro ao criar a carteira: {e}")
+
+def deletar_carteira_do_usuario(user):
+    try:
+        nome_carteira = input("Digite o nome da carteira para ser deletada: ")
+
+        with open(f"db/{user.id_usuario}.txt", "r") as file:
+            linhas = file.readlines()
+
+        if not any(line.startswith(f"- Carteira: {nome_carteira}") for line in linhas):
+            raise ValueError(f"A carteira '{nome_carteira}' não foi encontrada.")
+
+        novas_linhas = []
+        skip = False
+        for line in linhas:
+            if line.startswith(f"- Carteira: {nome_carteira}"):
+                skip = True
+                continue
+            if skip and line.startswith("- Carteira:"):
+                skip = False
+            if not skip:
+                novas_linhas.append(line)
+
+        result_linhas = [line for i, line in enumerate(novas_linhas) if not (line.strip() == "" and (i == 0 or novas_linhas[i - 1].strip() == ""))]
+
+        with open(f"db/{user.id_usuario}.txt", "w") as file:
+            file.writelines(result_linhas)
+
+        print(f"A carteira '{nome_carteira}' foi deletada com sucesso.")
+    except ValueError as ve:
+        print(f"Erro: {ve}")
+    except Exception as e:
+        print(f"Ocorreu um erro ao deletar a carteira: {e}")
