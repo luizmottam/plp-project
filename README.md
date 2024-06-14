@@ -2,8 +2,8 @@
 Projeto da Matéria de Programação para Dispositivos Móveis
 
 ## Membros
--Marco Antônio Miranda Costacurta (2212130044)
--Luiz de Aquino Motta Mendes (212130077)
+Marco Antônio Miranda Costacurta (2212130044)
+Luiz de Aquino Motta Mendes (212130077)
 
 ## **Requisitos**
 - Definições de OO
