@@ -3,7 +3,6 @@
 ## Membros
 
 Marco Antônio Miranda Costacurta (2212130044)
-
 Luiz de Aquino Motta Mendes (212130077)
 
 ## Descrição
